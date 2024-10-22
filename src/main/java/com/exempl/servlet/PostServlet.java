@@ -13,8 +13,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/posts")
 public class PostServlet extends HttpServlet {
-    private final PostRepository repository = new PostRepository();
+    private PostRepository repository;
 
+    @Override
+    public void init() {
+        repository = new PostRepository();
+    }
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Post> posts = repository.all();
