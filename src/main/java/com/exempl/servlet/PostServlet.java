@@ -18,11 +18,10 @@ public class PostServlet extends HttpServlet {
     private PostController controller;
 
     @Override
-    public void init(
-    		) throws ServletException {
-        final var repository = new PostRepository();
-        final var service = new PostService(repository);
-        controller = new PostController(service);
+    public void init() throws ServletException {
+        final var context = new AnnotationConfigApplicationContext("com.exempl.servlet");
+        final var service = context.getBean(PostController.class);
+        controller = service ;
     }
 
     @Override
